@@ -1,0 +1,57 @@
+{
+  "name": "vdauchy/composer-wrapper",
+  "description": "Composer wrapper",
+  "keywords": [
+    "php",
+    "composer",
+    "wrapper"
+  ],
+  "homepage": "https://github.com/vdauchy/composer-wrapper",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Victor Dauchy",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "ext-json": "*",
+    "illuminate/support": "^7.0",
+    "psr/log": "^1.1",
+    "league/flysystem" : "^2.0",
+    "symfony/process": "^5.0",
+    "symfony/var-dumper": "^5.0"
+  },
+  "require-dev": {
+    "ext-ast": "*",
+    "phpunit/phpunit": "^9.2",
+    "phpdocumentor/reflection-docblock": "^5.2",
+    "phan/phan": "^3.1",
+    "squizlabs/php_codesniffer": "^3.5",
+    "infection/infection": "^0.17",
+    "mockery/mockery": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "VDauchy\\ComposerWrapper\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VDauchy\\ComposerWrapper\\Tests\\Unit\\": "tests/unit"
+    }
+  },
+  "scripts": {
+    "unit": "vendor/bin/phpunit",
+    "style": "vendor/bin/phpcs",
+    "style:fix": "vendor/bin/phpcbf",
+    "lint": "vendor/bin/phan --color --progress-bar",
+    "infection": "vendor/bin/infection  --threads=4"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

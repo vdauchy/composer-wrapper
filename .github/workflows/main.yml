@@ -1,0 +1,34 @@
+name: Testing Composer-Wrapper
+on: [push, pull_request]
+jobs:
+  laravel:
+    name: Composer-Wrapper (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.4']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup PHP,
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: json, ast
+          coverage: xdebug
+          tools: composer:v1
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        
+      - name: Run Style checker
+        run: composer style
+      
+      - name: Run Linter
+        run: composer lint
+      
+      - name: Run Unit tests
+        run: sudo composer unit
